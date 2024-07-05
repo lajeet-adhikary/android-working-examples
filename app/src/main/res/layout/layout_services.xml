@@ -12,19 +12,41 @@
         android:id="@+id/btnStartService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Service"
+        android:text="Start Normal Service"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btnStopService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop Service"
+        android:text="Stop Normal Service"
         app:layout_constraintTop_toBottomOf="@+id/btnStartService"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText"/>
+
+    <Button
+        android:id="@+id/btnStartBoundService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Bound Service"
+        app:layout_constraintTop_toBottomOf="@+id/btnStopService"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText"/>
+
+    <Button
+        android:id="@+id/btnStopBoundService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Bound Service"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartBoundService"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,7 +47,7 @@ class NormalServiceExample: Service() {
         scope.launch {
             while (true) {
                 val value = (1..10000).random()
-                Log.d(TAG, "someOperation: $value")
+                Log.d(TAG, "someOperation in Normal service: $value")
                 delay(2000)
             }
         }
