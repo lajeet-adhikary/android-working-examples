@@ -73,7 +73,8 @@ class ServicesActivity : AppCompatActivity() {
 
     private fun stopBoundService() {
         if (!serviceConnected) return
-        boundService?.stopService() //calling a function inside the service
+        //calling a function inside the service, but just this will not ensure that the service will stop
+        boundService?.stopService()
         unbindService(serviceConnection) //disconnecting the ServiceConnection obj
         //updating variables
         serviceConnected = false
