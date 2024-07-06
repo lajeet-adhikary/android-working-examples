@@ -7,7 +7,9 @@ import android.content.Context
 import android.os.Build
 import com.lajeet.workingexamples.services.BoundServiceExample
 import com.lajeet.workingexamples.services.NormalServiceExample
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class WorkingExampleApp: Application() {
 
     override fun onCreate() {
