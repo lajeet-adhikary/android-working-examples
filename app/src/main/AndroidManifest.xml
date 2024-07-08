@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AppCompat.Light"
         tools:targetApi="31">
         <activity
-            android:name="com.lajeet.workingexamples.coroutines.CoroutinesActivity"
+            android:name="com.lajeet.workingexamples.flows.FlowsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,12 +25,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.lajeet.workingexamples.coroutines.CoroutinesActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name="com.lajeet.workingexamples.services.ServicesActivity"
             android:exported="false">
-            <!--<intent-filter>
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
 
         <service
