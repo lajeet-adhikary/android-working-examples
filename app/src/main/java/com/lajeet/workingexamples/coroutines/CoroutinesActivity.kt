@@ -49,7 +49,7 @@ class CoroutinesActivity : AppCompatActivity() {
     }
 
     private fun onBtnStart() {
-        viewModel.coroutineErrorExample()
+        viewModel.coroutineExampleWithWithContext()
     }
 
     private fun onBtnStop() {

@@ -10,6 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.yield
 import javax.inject.Inject
 
 @HiltViewModel
@@ -87,6 +90,7 @@ class CoroutinesViewModel @Inject constructor(
         viewModelScope.launch {
             Log.d(TAG, "multipleCoroutines: launch 1 start")
             delay(3000)
+            yield()
             Log.d(TAG, "multipleCoroutines: launch 1 end")
         }
         viewModelScope.launch {
@@ -104,14 +108,14 @@ class CoroutinesViewModel @Inject constructor(
          * launch 1 start
          * launch 1 end
          * launch 2 start
-         * outer end
+         * outer end <------------------ NOTE THIS
          * launch 2 end
          *
          * Output (RIGHT):
          * outer start
          * launch 1 start
          * launch 1 end
-         * outer end
+         * outer end <------------------- NOTE THIS
          * launch 2 start
          * launch 2 end
          * */
@@ -222,6 +226,76 @@ class CoroutinesViewModel @Inject constructor(
             Log.d(TAG, "coroutineCancel: outer end ${getThreadInfo()}")
         } catch (ex: Exception) {
             Log.d(TAG, "coroutineCancel: inside catch exception")
+            ex.printStackTrace()
+        }
+    }
+
+    fun coroutineExampleWithRunBlocking() {
+        /**
+         * Output:
+         * outer start
+         * outer end
+         * inner start
+         * inner run blocking start
+         * inner run blocking end
+         * inner end
+         * */
+        try {
+            Log.d(TAG, "coroutineRunBlockingExample: outer start ${getThreadInfo()}")
+            CoroutineScope(Dispatchers.Main).launch {
+                Log.d(TAG, "coroutineRunBlockingExample: inner start ${getThreadInfo()}")
+                runBlocking {
+                    Log.d(TAG, "coroutineRunBlockingExample: inner run blocking start ${getThreadInfo()}")
+                    delay(2000)
+                    Log.d(TAG, "coroutineRunBlockingExample: inner run blocking end ${getThreadInfo()}")
+                }
+                delay(1000)
+                Log.d(TAG, "coroutineRunBlockingExample: inner end ${getThreadInfo()}")
+            }
+            Log.d(TAG, "coroutineRunBlockingExample: outer end ${getThreadInfo()}")
+        } catch (ex: Exception) {
+            Log.d(TAG, "coroutineRunBlockingExample: inside catch exception")
+            ex.printStackTrace()
+        }
+    }
+
+    fun coroutineExampleWithWithContext() {
+        /**
+         * Output:
+         * outer start
+         * outer end
+         * inner start
+         * inner withContext start <------- Run blocking kind of operation
+         * inner withContext end
+         * inner end
+         * */
+        try {
+            Log.d(TAG, "coroutineExampleWithWithContext: outer start ${getThreadInfo()}")
+            CoroutineScope(Dispatchers.Main).launch {
+                Log.d(TAG, "coroutineExampleWithWithContext: inner start ${getThreadInfo()}")
+                withContext(Dispatchers.IO) {
+                    Log.d(TAG, "coroutineExampleWithWithContext: inner with context start ${getThreadInfo()}")
+                    delay(2000)
+                    Log.d(TAG, "coroutineExampleWithWithContext: inner with context end ${getThreadInfo()}")
+                }
+                Log.d(TAG, "coroutineExampleWithWithContext: inner end ${getThreadInfo()}")
+            }
+            Log.d(TAG, "coroutineExampleWithWithContext: outer end ${getThreadInfo()}")
+        } catch (ex: Exception) {
+            Log.d(TAG, "coroutineExampleWithWithContext: inside catch exception")
+            ex.printStackTrace()
+        }
+    }
+
+    fun coroutineExampleWithSupervisorScope() {
+        /**
+         * Output:
+         *
+         * */
+        try {
+
+        } catch (ex: Exception) {
+            Log.d(TAG, "coroutineExampleWithSupervisorScope: inside catch exception")
             ex.printStackTrace()
         }
     }
