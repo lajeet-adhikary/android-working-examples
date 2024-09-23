@@ -11,11 +11,13 @@ import kotlinx.coroutines.flow.flow
  * 2. Hot: Emit, even if there is no consumer
  *      2.a. StateFlow: holds data and emit updates
  *      2.b. SharedFlow: can be collected by multiple collectors
+ * 3. Properties: replay, buffer, bufferOverflow, conflate
  * */
 class FlowsViewModel: ViewModel() {
 
     init {
-
+        //to showcase that, it will not emit until there is no collector
+        startNormalFlow()
     }
 
     fun startNormalFlow() {
